@@ -1,11 +1,12 @@
-# Título del trabajo
+# BurgoBoy
 
-Descripción breve del proyecto a realizar (2-3 frases).
+es una consola con diversos juegos
 
 ## Integrantes del equipo
 
-Nombres, apellidos, y usuario GitHub de los integrantes del equipo.
+javier lopez fernandez: javierlopez1
+Samuel Hornsby Altares: SamuelHornsbyAltares
 
 ## Objetivos del trabajo
 
-Lista de los objetivos que se persiguen con el trabajo propuesto.
+hacer un videojuego usando los conocimientos obtenidos en lenguaje C

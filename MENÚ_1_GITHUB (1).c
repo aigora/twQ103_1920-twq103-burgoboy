@@ -4,11 +4,11 @@
 #include<math.h>
 #include<time.h>
 
-//FUNCIONES MENÚ
+//FUNCIONES MENÃš
 void inicio(void);
 void titulo(void);
 
-//MENÚ
+//MENÃš
 int main()
 {
 	inicio();
@@ -41,14 +41,14 @@ int main()
 					system("cls");
 					titulo();
 					system("color 4F");
-					printf("TIC TAC TOE\n\n");
+					printf("TIC TAC TOE 1 Vs.1\n\n");
 					printf("Jugador 1--->X\n\n");
 					printf("Jugador 2--->O\n\n\n\n");
 					break;
 				case 2:
 					titulo();
 					system("color 3F");
-					printf("TIC TAC TOE\n\n");
+					printf("TIC TAC TOE Vs.CPU\n\n");
 					printf("Jugador 1--->X\n\n");
 					printf("CPU--->O\n\n\n\n");
 					break;
@@ -80,11 +80,35 @@ int main()
 					printf("MODO INDIVIDUAL Vs. CPU\n\n");
 					break;
 			}break;	
-		case 3: //OTRO JUEGO
+		case 3: //ADIVINAR UN NÃšMERO 
 			system("cls");
+			fflush(stdin);
 			system("color 1F");
 			titulo();
 			printf("ADIVINA EL NUMERO\n\n\n");
+			int i;
+			int salto = 0;
+			int p;
+			int misterio = 0;
+			int esta = 0;
+			printf("\nPiensa un numero del 1 al 100\n");
+			printf("Responde a las preguntas con si(s) o no(n)\n\n");
+			for (p = 1; p< 128; p *= 2){
+			 	salto = 0;
+			 	for (i=1; i<=100; i++){
+			 		if (i & p){
+			 			printf("%3d%c", i, salto % 10 ? ' ' : '\n');
+			 			salto++;
+			 		}
+			 	}
+			printf("\n\nEsta tu numero en esta lista?: ");
+			esta = getchar();
+			getchar();
+			if (esta == 's' || esta == 'S')
+			misterio += p;
+			system("cls");
+			}
+			printf("\n\nEl numero que has pensado es %d\n", misterio);
 			break;
 		case 4: //SALIR
 			system("cls");
@@ -103,7 +127,7 @@ int main()
 	return 0;
 }
 
-//FUNCIONES MENÚ
+//FUNCIONES MENÃš
 void inicio(void)
 {
 	system("color 1F");

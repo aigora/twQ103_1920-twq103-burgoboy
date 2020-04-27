@@ -4,9 +4,12 @@
 #include<math.h>
 #include<time.h>
 
-//FUNCIONES MENÚ
+//PROTOTIPOS DE FUNCIONES MENÚ
 void inicio(void);
 void titulo(void);
+
+//PROTOTIPOS DE FUNCIONES ADIVINAR EL NÚMERO
+void adivinar(void);
 
 //MENÚ
 int main()
@@ -86,29 +89,7 @@ int main()
 			system("color 1F");
 			titulo();
 			printf("ADIVINA EL NUMERO\n\n\n");
-			int i;
-			int salto = 0;
-			int p;
-			int misterio = 0;
-			int esta = 0;
-			printf("\nPiensa un numero del 1 al 100\n");
-			printf("Responde a las preguntas con si(s) o no(n)\n\n");
-			for (p = 1; p< 128; p *= 2){
-			 	salto = 0;
-			 	for (i=1; i<=100; i++){
-			 		if (i & p){
-			 			printf("%3d%c", i, salto % 10 ? ' ' : '\n');
-			 			salto++;
-			 		}
-			 	}
-			printf("\n\nEsta tu numero en esta lista?: ");
-			esta = getchar();
-			getchar();
-			if (esta == 's' || esta == 'S')
-			misterio += p;
-			system("cls");
-			}
-			printf("\n\nEl numero que has pensado es %d\n", misterio);
+			adivinar();
 			break;
 		case 4: //SALIR
 			system("cls");
@@ -143,3 +124,29 @@ void titulo(void)
 	printf("\t\t\t\t\t    By SamuSung Electronics\t\t\t\n\n\n\n");
 }
 
+//FUNCIONES ADIVINAR EL NÚMERO
+void adivinar(void){
+	int i;
+	int salto = 0;
+	int p;
+	int misterio = 0;
+	int esta = 0;
+	printf("\nPiensa un numero del 1 al 100\n");
+	printf("Responde a las preguntas con si(s) o no(n)\n\n");
+	for (p = 1; p< 128; p *= 2){
+		salto = 0;
+		for (i=1; i<=100; i++){
+			if (i & p){
+			 	printf("%3d%c", i, salto % 10 ? ' ' : '\n');
+			 	salto++;
+			}
+		}
+		printf("\n\nEsta tu numero en esta lista?: ");
+		esta = getchar();
+		getchar();
+		if (esta == 's' || esta == 'S')
+		misterio += p;
+		system("cls");
+	}
+	printf("\n\nEl numero que has pensado es %d\n", misterio);
+}

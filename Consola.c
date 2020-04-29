@@ -78,15 +78,16 @@ int main()
 					system("color 4F");
 					printf("TIC TAC TOE 1 Vs.1\n\n");
 					printf("Jugador 1--->X\n\n");
-					printf("Jugador 2--->O\n\n\n\n");
+					printf("Jugador 2--->O\n\n");
 					tttmulti(c);
 					break;
 				case 2:
+					system("cls");
 					titulo();
 					system("color 3F");
 					printf("TIC TAC TOE Vs.CPU\n\n");
 					printf("Jugador 1--->X\n\n");
-					printf("CPU--->O\n\n\n\n");
+					printf("CPU--->O\n\n");
 					tttcpu(c);
 					break;
 			}break;

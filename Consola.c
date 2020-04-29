@@ -159,7 +159,7 @@ void titulo(void)
 	printf("\t\t\t\t\t    By SamuSung Electronics\t\t\t\n\n\n\n");
 	i = 0;
 	putchar('\n');
-	for (; i < 100; i++) {
+	for (; i < 120; i++) {
 		putchar('_');
 	}
 }
@@ -168,6 +168,11 @@ void titulo(void)
 void tttcpu (char c [3][3]){
 	int i,j;
 	i=0;
+	int contador=0;
+	struct NUser usuarios[50];
+	printf("Introduce el nombre del usuario 1:\n");
+	scanf("%s", usuarios[contador].nombre1);
+	fflush(stdin);
 	Intro_Primera(c);
 	do{
 		system("cls");
@@ -184,10 +189,10 @@ void tttcpu (char c [3][3]){
 	system("cls");
 	Tablero(c);
 	if(j==0){
-		printf("VICTORIA, HAS GANADO\n\n");
+		printf("VICTORIA, HAS GANADO %s\n\n",usuarios[contador].nombre1);
 	}
 	else if(j==1){
-		printf("DERROTA, HAS PERDIDO\n\n");
+		printf("DERROTA, HAS PERDIDO %s\n\n",usuarios[contador].nombre1);
 	}
 	else{
 		printf("EMPATE\n\n");
@@ -196,6 +201,13 @@ void tttcpu (char c [3][3]){
 void tttmulti (char c [3][3]){
 	int i,j;
 	i=0;
+	int contador=0;
+	struct NUser usuarios[50];
+	printf("Introduce el nombre del usuario 1:\n");
+	scanf("%s", usuarios[contador].nombre1);
+	printf("Introduce el nombre del usuario 2:\n");
+	scanf("%s", usuarios[contador].nombre2);
+	fflush(stdin);
 	Intro_Primera(c);
 	do{
 		system("cls");
@@ -212,13 +224,13 @@ void tttmulti (char c [3][3]){
 	system("cls");
 	Tablero(c);
 	if(j==0){
-		printf("VICTORIA, HAS GANADO\n\n");
+		printf("VICTORIA, HAS GANADO %s\n\n",usuarios[contador].nombre1);
 	}
 	else if(j==1){
-		printf("DERROTA, HAS PERDIDO\n\n");
+		printf("VICTORIA, HAS GANADO %s\n\n",usuarios[contador].nombre2);
 	}
 	else{
-		printf("EMPATE\n\n");
+		printf("EMPATE ENTRE %s y %s\n\n",usuarios[contador].nombre1,usuarios[contador].nombre2);
 	}
 }
 void Intro_Primera (char c [3][3]){
@@ -916,7 +928,7 @@ void adivinar(void){
 	int p;
 	int misterio = 0;
 	int esta = 0;
-	printf("\nPiensa un numero del 1 al 100\n");
+	printf("Piensa un numero del 1 al 100\n");
 	printf("Responde a las preguntas con si(s) o no(n)\n\n");
 	for (p = 1; p< 128; p *= 2){
 		salto = 0;

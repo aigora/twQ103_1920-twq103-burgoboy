@@ -4,6 +4,9 @@
 #include<math.h>
 #include<time.h>
 
+//DEFINICIONES PIEDRA PAPEL TIJERA
+#define MAX 3 
+
 //PROTOTIPOS DE FUNCIONES MENÚ
 void inicio(void);
 void titulo(void);
@@ -19,19 +22,34 @@ void Intro_User1 (char c [3][3]);
 void Intro_User2 (char c [3][3]);
 int Ganador1 (char c [3][3]);
 int Ganador2 (char c[3][3]);
+	
+
+//PROTOTIPOS DE FUNCIONES PIEDRA PAPEL TIJERA
+void pptmulti();
+void pptcpu();
+int aleatorio(); 
+int resultado(int a ,int b); 
+void selecciones(int a); 
 
 //PROTOTIPOS DE FUNCIONES ADIVINAR EL NÚMERO
 void adivinar(void);
 
+//ESTRUCTURAS JUEGO PIEDRA PAPEL TIJERA
+struct NUser { // Es un tipo de dato que se llaman estructuras
+	char nombre1[50];
+	char nombre2[50];
+};
+
 //MENÚ
 int main()
 {
-	inicio();
-	titulo();
+	int contador=0;
 	int opcion,opcion2;	
 	char c [3] [3];
+	inicio();	
+	titulo();
 	system("color 1F");
-	printf("Escoja un juego:\n\n");
+	printf("\nEscoja un juego:\n\n");
 	printf("1)	TIC TAC TOE\n");	
 	printf("2)	PIEDRA PAPEL TIJERA\n");
 	printf("3)	ADIVINA EL NUMERO\n");	
@@ -88,6 +106,7 @@ int main()
 					system("color 4F");
 					printf("PIEDRA PAPEL TIJERA\n");
 					printf("MODO MULTIJUGADOR 1 Vs.1\n\n");
+					pptmulti();
 					break;
 				case 2:
 					system("cls");
@@ -95,9 +114,10 @@ int main()
 					system("color 3F");
 					printf("PIEDRA PAPEL TIJERA\n");
 					printf("MODO INDIVIDUAL Vs. CPU\n\n");
+					pptcpu();
 					break;
 			}break;	
-		case 3: //ADIVINAR UN NÚMERO 
+		case 3: //ADIVINAR EL NÚMERO
 			system("cls");
 			fflush(stdin);
 			system("color 1F");
@@ -132,10 +152,16 @@ void inicio(void)
 }
 void titulo(void)
 {
+	int i;
 	system("color 1F");
 	printf("\t\t\t\t\t******CHINTENDO ZII LTD.******\t\t\t\n");
 	printf("\t\t\t\t\t      All rights reserved\t\t\t\n");
 	printf("\t\t\t\t\t    By SamuSung Electronics\t\t\t\n\n\n\n");
+	i = 0;
+	putchar('\n');
+	for (; i < 100; i++) {
+		putchar('_');
+	}
 }
 
 //FUNCIONES TIC TAC TOE
@@ -672,6 +698,216 @@ void Intro_User2 (char c [3][3]){
 	}while(k==1);
 	c [i][j]='O';
 }
+
+
+//FUNCIONES PIEDRA PAPEL TIJERA
+void pptmulti(){
+	int contador=0;
+	struct NUser usuarios[50];
+	printf("Introduce el nombre del usuario 1:\n");
+	scanf("%s", usuarios[contador].nombre1);
+	printf("Introduce el nombre del usuario 2:\n");
+	scanf("%s", usuarios[contador].nombre2);
+	fflush(stdin);	
+	int seguir=1; 
+	int jugador,enemigo; 
+	int salida1; 
+	int marcaju=0;int marcaene=0;  
+	do { 
+		enemigo=resultado1(jugador,enemigo); 
+		jugador=resultado2(jugador,enemigo);
+		printf("\nSelecciona tu jugada(%s)",usuarios[contador].nombre1); 
+		printf("\n 1-->Piedra \n 2-->Papel \n 3-->Tijeras\n"); 
+		scanf("%d",&jugador);
+		system("cls");
+		printf("\nSelecciona tu jugada(%s)",usuarios[contador].nombre2); 
+		printf("\n 1-->Piedra \n 2-->Papel \n 3-->Tijeras\n"); 		 
+		scanf("%d",&enemigo);
+		system("cls");
+		while(jugador<1 || jugador>3) { 
+			printf("\nOpcion incorrecta (Seleccione de nuevo un numero entre 1 y 3)\n"); 
+			scanf("%d",&jugador); 
+		} 
+		while(enemigo<1 || enemigo>3){ 
+			printf("\nOpcion incorrecta (Seleccione de nuevo un numero entre 1 y 3)\n"); 
+			scanf("%d",&enemigo); 
+		}
+		system("cls");
+		printf("\n%s HA ESCOGIDO ",usuarios[contador].nombre1);selecciones(jugador); 
+		printf("\n%s HA ESCOGIDO ",usuarios[contador].nombre2);selecciones(enemigo); 
+					  
+		salida1=resultado2(jugador,enemigo); 
+		if(salida1==0) printf("\nEMPATE"); 
+		else if (salida1==1){ 
+			printf("\nVICTORIA DE %s",usuarios[contador].nombre1); 
+			marcaju++; 
+		} 
+		else{ 
+			printf("\nVICTORIA DE %s",usuarios[contador].nombre2); 
+			marcaene++; 
+		} 
+		printf("\nMARCADOR\n%d (%s)  :  %d (%s)",marcaju,usuarios[contador].nombre1,marcaene,usuarios[contador].nombre2); 
+		do{ 
+			printf("\nDesea seguir jugando?\n"); 
+			printf("1(SI) 0(NO)\n");
+			scanf("%d",&seguir);
+			system("cls");  
+			if(seguir<0 || seguir>1) printf("\nOpcion incorrecta");
+			system("cls");   
+		} while(seguir<0 || seguir>1); 			  
+	}while(seguir); 
+	system("pause");
+}
+void pptcpu(){
+	int contador=0;
+	struct NUser usuarios[50];
+	printf("Introduce tu nombre para jugar: \n");
+	scanf("%s", usuarios[contador].nombre1);
+	system("cls");
+	fflush(stdin);	
+	srand((int)time(NULL)); 
+	int seguir=1; 
+	int jugador,enemigo; 
+	int salida; 
+	int marcaju=0;int marcaene=0; 
+	printf("\n\t\t\t\t\tBIENVENIDO AL PIEDRA PAPEL TIJERAS\n\n"); 
+	do 
+	{ 
+	    enemigo=aleatorio(); 
+	    printf("\nSelecciona tu jugada (elige un numero)"); 
+	    printf("\n 1-->Piedra \n 2-->Papel \n 3-->Tijeras\n"); 
+	    scanf("%d",&jugador); 
+	    while(jugador<1 || jugador>3) 
+	    { 
+	  
+	        printf("\nOpcion incorrecta (Seleccione de nuevo un numero entre 1 y 3)\n"); 
+	        scanf("%d",&jugador); 
+	    } 
+	    system("cls");
+	    printf("\nHas escogido: ");
+		selecciones(jugador); 
+	    printf("\nTu oponente ha escogido: ");
+		selecciones(enemigo); 
+	  
+		salida=resultado(jugador,enemigo); 
+		if(salida==0){
+			printf("\nEMPATE"); 	
+		} else if (salida==1) { 
+	    	printf("\nVICTORIA"); 
+	    	marcaju++; 
+		}else{ 
+			printf("\nDERROTA"); 
+			marcaene++; 
+		} 
+		printf("\nMARCADOR\n%d (%s)  :  %d (CPU)",marcaju,usuarios[contador].nombre1,marcaene); 
+		do { 
+	    	printf("\nDesea seguir jugando? 1(SI) 0(NO): "); 
+	    	scanf("%d",&seguir); 
+	    	system("cls");
+	    	if(seguir<0 || seguir>1) printf("\nOpcion incorrecta"); 
+		} while(seguir<0 || seguir>1); 
+	}while(seguir); 
+}
+
+int aleatorio(){ 
+	int numero; 
+	numero = rand()%MAX+1; 
+	return numero; 
+} 
+  
+  
+int resultado(int jugador,int enemigo){ 
+    switch (jugador){ 
+    case 1: 
+        if(jugador==enemigo) 
+            return 0; 
+        else if((jugador==1) && (enemigo==3)) 
+            return 1; 
+        else return 2; 
+        break; 
+    case 2: 
+        if(jugador==enemigo) 
+            return 0; 
+        else if((jugador==2) && (enemigo==1)) 
+            return 1; 
+        else return 2; 
+        break; 
+    case 3: 
+        if(jugador==enemigo) 
+            return 0; 
+        else if((jugador==3) && (enemigo==2)) 
+            return 1; 
+        else return 2; 
+        break; 
+    } 
+} 
+  
+void selecciones(int a){ 
+    switch (a){ 
+        case 1: printf("PIEDRA"); 
+        break; 
+        case 2: printf("PAPEL"); 
+        break; 
+        case 3: printf("TIJERAS"); 
+        break; 
+    } 
+} 
+
+int resultado1(int jugador,int enemigo){ 
+	 switch (jugador) 
+    { 
+    case 1: 
+        if(jugador==enemigo) 
+            return 0; 
+        else if((jugador==1) && (enemigo==3)) 
+            return 1; 
+        else return 2; 
+        break; 
+    case 2: 
+        if(jugador==enemigo) 
+            return 0; 
+        else if((jugador==2) && (enemigo==1)) 
+            return 1; 
+        else return 2; 
+        break; 
+    case 3: 
+        if(jugador==enemigo) 
+            return 0; 
+        else if((jugador==3) && (enemigo==2)) 
+            return 1; 
+        else return 2; 
+        break; 
+    } 
+} 
+  
+  
+int resultado2(int jugador,int enemigo){ 
+    switch (jugador) 
+    { 
+    case 1: 
+        if(jugador==enemigo) 
+            return 0; 
+        else if((jugador==1) && (enemigo==3)) 
+            return 1; 
+        else return 2; 
+        break; 
+    case 2: 
+        if(jugador==enemigo) 
+            return 0; 
+        else if((jugador==2) && (enemigo==1)) 
+            return 1; 
+        else return 2; 
+        break; 
+    case 3: 
+        if(jugador==enemigo) 
+            return 0; 
+        else if((jugador==3) && (enemigo==2)) 
+            return 1; 
+        else return 2; 
+        break; 
+    } 
+} 
+ 
 
 //FUNCIONES ADIVINAR EL NÚMERO
 void adivinar(void){

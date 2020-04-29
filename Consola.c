@@ -34,11 +34,13 @@ void selecciones(int a);
 //PROTOTIPOS DE FUNCIONES ADIVINAR EL NÚMERO
 void adivinar(void);
 
-//ESTRUCTURAS JUEGO PIEDRA PAPEL TIJERA
+//ESTRUCTURAS 
 struct NUser { // Es un tipo de dato que se llaman estructuras
 	char nombre1[50];
 	char nombre2[50];
 };
+
+//Anotación: faltan ficheros (podríamos incluir nombre jugador y puntuación en el fichero)
 
 //MENÚ
 int main()

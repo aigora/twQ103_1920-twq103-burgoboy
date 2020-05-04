@@ -1,6 +1,8 @@
 # BurgoBoy
 
-Chintendo Zii es una divertida consola con juegos para el disfrute de toda la familia.
+![](https://github.com/aigora/twQ103_1920-twq103-burgoboy/blob/master/logo.png)
+
+BurgoBoy by Chintendo Zii es una divertida consola con juegos para el disfrute de toda la familia.
 
 ## Integrantes del equipo
 

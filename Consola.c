@@ -34,113 +34,134 @@ void selecciones(int a);
 //PROTOTIPOS DE FUNCIONES ADIVINAR EL NÚMERO
 void adivinar(void);
 
-//ESTRUCTURAS 
+//ESTRUCTURAS JUEGO PIEDRA PAPEL TIJERA
 struct NUser { // Es un tipo de dato que se llaman estructuras
 	char nombre1[50];
 	char nombre2[50];
 };
 
-//Anotación: faltan ficheros (podríamos incluir nombre jugador y puntuación en el fichero)
-
 //MENÚ
 int main()
 {
+	struct NUser usuarios[50];
+	int i;
 	int contador=0;
 	int opcion,opcion2;	
 	char c [3] [3];
 	inicio();	
-	titulo();
-	system("color 1F");
-	printf("\nEscoja un juego:\n\n");
-	printf("1)	TIC TAC TOE\n");	
-	printf("2)	PIEDRA PAPEL TIJERA\n");
-	printf("3)	ADIVINA EL NUMERO\n");	
-	printf("4)	SALIR\n\n");
-	printf("Marque aqui la opcion:\t");
-	scanf("%i",&opcion);
-	switch(opcion)
-	{
-		case 1: //TIC TAC TOE
-			system("cls");
-			system("color 1F");
-			titulo();
-			printf("TIC TAC TOE\n\n\n");
-			printf("Seleccione el modo de juego:\n\n");
-			printf("1)	MODO MULTIJUGADOR 1 Vs.1\n");
-			printf("2)	MODO INDIVIDUAL Vs. CPU\n");
-			printf("Marque aqui su opcion:\t");
-			scanf("%i",&opcion2);
-			switch(opcion2)
-			{
-				case 1:
-					system("cls");
-					titulo();
-					system("color 4F");
-					printf("TIC TAC TOE 1 Vs.1\n\n");
-					printf("Jugador 1--->X\n\n");
-					printf("Jugador 2--->O\n\n");
-					tttmulti(c);
-					break;
-				case 2:
-					system("cls");
-					titulo();
-					system("color 3F");
-					printf("TIC TAC TOE Vs.CPU\n\n");
-					printf("Jugador 1--->X\n\n");
-					printf("CPU--->O\n\n");
-					tttcpu(c);
-					break;
-			}break;
-		case 2: //PIEDRA PAPEL TIJERA
-			system("cls");
-			system("color 1F");
-			titulo();
-			printf("PIEDRA PAPEL TIJERA\n\n\n");
-			printf("Seleccione el modo de juego:\n\n");
-			printf("1)	MODO MULTIJUGADOR 1 Vs.1\n");
-			printf("2)	MODO INDIVIDUAL Vs. CPU\n");
-			printf("Marque aqui su opcion:\t");
-			scanf("%i",&opcion2);
-			switch(opcion2)
-			{
-				case 1:
-					system("cls");
-					titulo();
-					system("color 4F");
-					printf("PIEDRA PAPEL TIJERA\n");
-					printf("MODO MULTIJUGADOR 1 Vs.1\n\n");
-					pptmulti();
-					break;
-				case 2:
-					system("cls");
-					titulo();
-					system("color 3F");
-					printf("PIEDRA PAPEL TIJERA\n");
-					printf("MODO INDIVIDUAL Vs. CPU\n\n");
-					pptcpu();
-					break;
-			}break;	
-		case 3: //ADIVINAR EL NÚMERO
-			system("cls");
-			fflush(stdin);
-			system("color 1F");
-			titulo();
-			printf("ADIVINA EL NUMERO\n\n\n");
-			adivinar();
-			break;
-		case 4: //SALIR
-			system("cls");
-			system("color 1F");
-			titulo();
-			printf("HA ESCOGIDO LA OPCION: SALIR\n\n\n");
-			printf("ADIOS Y HASTA PRONTO!");
-			return 0;
-			break;
-		default:
-			return 1;
-			system("cls");
-			break;				
+	FILE *archivo;
+	archivo=fopen("partidas.txt","r");
+	while (fscanf(archivo, "%s %s", &usuarios[contador].nombre1, &usuarios[contador].nombre2)!= EOF){
+		contador++;
 	}
+	fclose(archivo);
+	do{
+		system("cls");
+		fflush(stdin);
+		titulo();
+		system("color 1F");
+		printf("\nEscoja un juego:\n\n");
+		printf("1)	TIC TAC TOE\n");	
+		printf("2)	PIEDRA PAPEL TIJERA\n");
+		printf("3)	ADIVINA EL NUMERO\n");	
+		printf("4)	SALIR\n\n");
+		printf("Marque aqui la opcion:\t");
+		scanf("%i",&opcion);
+		switch(opcion)
+		{
+			case 1: //TIC TAC TOE
+				system("cls");
+				system("color 1F");
+				titulo();
+				printf("TIC TAC TOE\n\n\n");
+				printf("Seleccione el modo de juego:\n\n");
+				printf("1)	MODO MULTIJUGADOR 1 Vs.1\n");
+				printf("2)	MODO INDIVIDUAL Vs. CPU\n");
+				printf("Marque aqui su opcion:\t");
+				scanf("%i",&opcion2);
+				switch(opcion2)
+				{
+					case 1:
+						system("cls");
+						titulo();
+						system("color 4F");
+						printf("TIC TAC TOE 1 Vs.1\n\n");
+						printf("Jugador 1--->X\n\n");
+						printf("Jugador 2--->O\n\n");
+						tttmulti(c);
+						system("pause");
+						break;
+					case 2:
+						system("cls");
+						titulo();
+						system("color 3F");
+						printf("TIC TAC TOE Vs.CPU\n\n");
+						printf("Jugador 1--->X\n\n");
+						printf("CPU--->O\n\n");
+						tttcpu(c);
+						system("pause");
+						break;
+				}break;
+			case 2: //PIEDRA PAPEL TIJERA
+				system("cls");
+				system("color 1F");
+				titulo();
+				printf("PIEDRA PAPEL TIJERA\n\n\n");
+				printf("Seleccione el modo de juego:\n\n");
+				printf("1)	MODO MULTIJUGADOR 1 Vs.1\n");
+				printf("2)	MODO INDIVIDUAL Vs. CPU\n");
+				printf("Marque aqui su opcion:\t");
+				scanf("%i",&opcion2);
+				switch(opcion2)
+				{
+					case 1:
+						system("cls");
+						titulo();
+						system("color 4F");
+						printf("PIEDRA PAPEL TIJERA\n");
+						printf("MODO MULTIJUGADOR 1 Vs.1\n\n");
+						pptmulti();
+						system("pause");
+						break;
+					case 2:
+						system("cls");
+						titulo();
+						system("color 3F");
+						printf("PIEDRA PAPEL TIJERA\n");
+						printf("MODO INDIVIDUAL Vs. CPU\n\n");
+						pptcpu();
+						system("pause");
+						break;
+				}break;	
+			case 3: //ADIVINAR EL NÚMERO
+				system("cls");
+				fflush(stdin);
+				system("color 1F");
+				titulo();
+				printf("ADIVINA EL NUMERO\n\n\n");
+				adivinar();
+				system("pause");
+				break;
+			case 4: //SALIR
+				system("cls");
+				system("color 1F");
+				titulo();
+				printf("HA ESCOGIDO LA OPCION: SALIR\n\n\n");
+				printf("ADIOS Y HASTA PRONTO!");
+				archivo = fopen("partidas.txt", "w");
+				for (i=0; i<contador; i++) {
+					fprintf(archivo,"%s\n", usuarios[i].nombre1);
+					fprintf(archivo,"%s\n", usuarios[i].nombre2);		
+				}
+				fclose(archivo);
+				return 0;
+				break;
+			default:
+				return 1;
+				system("cls");
+				break;				
+		}	
+	}while(opcion!=4);
 	system("pause");
 	return 0;
 }
@@ -417,7 +438,7 @@ int Ganador1 (char c[3][3]){
 				return 1; //He perdido
 			}
 		}
-		if(c[1][1]==c[0][1]&&c[1][1]==c[2][0]){
+		if(c[1][1]==c[0][2]&&c[1][1]==c[2][0]){
 			if(c[1][1]='X'){
 				return 0; //He ganado
 			}
@@ -490,7 +511,7 @@ int Ganador2 (char c[3][3]){
 				return 1; //He perdido
 			}
 		}
-		if(c[1][1]==c[0][1]&&c[1][1]==c[2][0]){
+		if(c[1][1]==c[0][2]&&c[1][1]==c[2][0]){
 			if(c[1][1]='O'){
 				return 0; //He ganado
 			}

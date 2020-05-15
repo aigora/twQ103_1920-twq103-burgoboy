@@ -34,8 +34,8 @@ void selecciones(int a);
 //PROTOTIPOS DE FUNCIONES ADIVINAR EL NÚMERO
 void adivinar(void);
 
-//ESTRUCTURAS JUEGO PIEDRA PAPEL TIJERA
-struct NUser { // Es un tipo de dato que se llaman estructuras
+//ESTRUCTURAS 
+struct NUser { 
 	char nombre1[50];
 	char nombre2[50];
 };
@@ -43,18 +43,23 @@ struct NUser { // Es un tipo de dato que se llaman estructuras
 //MENÚ
 int main()
 {
-	struct NUser usuarios[50];
-	int i;
 	int contador=0;
-	int opcion,opcion2;	
-	char c [3] [3];
-	inicio();	
+	struct NUser usuarios[50];
 	FILE *archivo;
 	archivo=fopen("partidas.txt","r");
 	while (fscanf(archivo, "%s %s", &usuarios[contador].nombre1, &usuarios[contador].nombre2)!= EOF){
 		contador++;
 	}
 	fclose(archivo);
+	int i;
+	int opcion,opcion2;	
+	char c [3] [3];
+	inicio();
+	printf("Introduce el nombre del usuario 1:\n");
+	scanf("%s", usuarios[contador].nombre1);
+	printf("Introduce el nombre del usuario 2:\n");
+	scanf("%s", usuarios[contador].nombre2);
+	system("cls");	
 	do{
 		system("cls");
 		fflush(stdin);
@@ -88,6 +93,7 @@ int main()
 						printf("TIC TAC TOE 1 Vs.1\n\n");
 						printf("Jugador 1--->X\n\n");
 						printf("Jugador 2--->O\n\n");
+						system("pause");
 						tttmulti(c);
 						system("pause");
 						break;
@@ -98,6 +104,7 @@ int main()
 						printf("TIC TAC TOE Vs.CPU\n\n");
 						printf("Jugador 1--->X\n\n");
 						printf("CPU--->O\n\n");
+						system("pause");
 						tttcpu(c);
 						system("pause");
 						break;
@@ -149,10 +156,8 @@ int main()
 				printf("HA ESCOGIDO LA OPCION: SALIR\n\n\n");
 				printf("ADIOS Y HASTA PRONTO!");
 				archivo = fopen("partidas.txt", "w");
-				for (i=0; i<contador; i++) {
-					fprintf(archivo,"%s\n", usuarios[i].nombre1);
-					fprintf(archivo,"%s\n", usuarios[i].nombre2);		
-				}
+				fprintf(archivo,usuarios[contador].nombre1);
+				fprintf(archivo,usuarios[contador].nombre2);
 				fclose(archivo);
 				return 0;
 				break;
@@ -194,8 +199,8 @@ void tttcpu (char c [3][3]){
 	i=0;
 	int contador=0;
 	struct NUser usuarios[50];
-	printf("Introduce el nombre del usuario 1:\n");
-	scanf("%s", usuarios[contador].nombre1);
+	/*printf("Introduce el nombre del usuario 1:\n");
+	scanf("%s", usuarios[contador].nombre1);*/
 	fflush(stdin);
 	Intro_Primera(c);
 	do{
@@ -227,10 +232,10 @@ void tttmulti (char c [3][3]){
 	i=0;
 	int contador=0;
 	struct NUser usuarios[50];
-	printf("Introduce el nombre del usuario 1:\n");
+	/*printf("Introduce el nombre del usuario 1:\n");
 	scanf("%s", usuarios[contador].nombre1);
 	printf("Introduce el nombre del usuario 2:\n");
-	scanf("%s", usuarios[contador].nombre2);
+	scanf("%s", usuarios[contador].nombre2);*/
 	fflush(stdin);
 	Intro_Primera(c);
 	do{
@@ -740,10 +745,10 @@ void Intro_User2 (char c [3][3]){
 void pptmulti(){
 	int contador=0;
 	struct NUser usuarios[50];
-	printf("Introduce el nombre del usuario 1:\n");
+	/*printf("Introduce el nombre del usuario 1:\n");
 	scanf("%s", usuarios[contador].nombre1);
 	printf("Introduce el nombre del usuario 2:\n");
-	scanf("%s", usuarios[contador].nombre2);
+	scanf("%s", usuarios[contador].nombre2);*/
 	fflush(stdin);	
 	int seguir=1; 
 	int jugador,enemigo; 
@@ -797,8 +802,8 @@ void pptmulti(){
 void pptcpu(){
 	int contador=0;
 	struct NUser usuarios[50];
-	printf("Introduce tu nombre para jugar: \n");
-	scanf("%s", usuarios[contador].nombre1);
+	/*printf("Introduce tu nombre para jugar: \n");
+	scanf("%s", usuarios[contador].nombre1);*/
 	system("cls");
 	fflush(stdin);	
 	srand((int)time(NULL)); 
